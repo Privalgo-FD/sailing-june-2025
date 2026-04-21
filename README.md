@@ -27,7 +27,7 @@ In your domain registrar (wherever silvertownconsulting.com is managed), add:
 ```
 Type:  CNAME
 Name:  sailing
-Value: [your-github-username].github.io
+Value: Privalgo-FD.github.io
 TTL:   3600
 ```
 
