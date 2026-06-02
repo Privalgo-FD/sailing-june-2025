@@ -432,3 +432,42 @@ body {
   transition: opacity 0.55s cubic-bezier(.22,.68,0,1), transform 0.55s cubic-bezier(.22,.68,0,1);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── WEATHER PILL ───────────────────────────────────────── */
+.weather-pill {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.45rem 1.1rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+}
+.weather-loading {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* ─── MAP LINKS ──────────────────────────────────────────── */
+.map-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s;
+}
+.map-link:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.6);
+}
+.highlight-card .map-link {
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+.highlight-card .map-link:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+}
