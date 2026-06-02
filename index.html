@@ -47,6 +47,11 @@
         </div>
       </div>
     </div>
+    <!-- WEATHER PILL -->
+    <div class="weather-pill" id="weatherPill">
+      <span class="weather-loading">Loading weather…</span>
+    </div>
+
     <div class="hero-scroll">scroll</div>
   </header>
 
@@ -336,5 +341,41 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Weather pill — Open-Meteo, no API key required
+    // Coordinates: Hydra harbour
+    const LAT = 37.3483;
+    const LON = 23.4731;
+
+    const weatherIcons = {
+      0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+      45: '🌫️', 48: '🌫️',
+      51: '🌦️', 53: '🌦️', 55: '🌧️',
+      61: '🌧️', 63: '🌧️', 65: '🌧️',
+      71: '🌨️', 73: '🌨️', 75: '🌨️',
+      80: '🌦️', 81: '🌧️', 82: '⛈️',
+      95: '⛈️', 96: '⛈️', 99: '⛈️'
+    };
+
+    const windDir = deg => {
+      const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+      return dirs[Math.round(deg / 22.5) % 16];
+    };
+
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weathercode,windspeed_10m,winddirection_10m&windspeed_unit=kn&timezone=Europe/Athens`)
+      .then(r => r.json())
+      .then(data => {
+        const c = data.current;
+        const icon = weatherIcons[c.weathercode] || '🌡️';
+        const temp = Math.round(c.temperature_2m);
+        const wind = Math.round(c.windspeed_10m);
+        const dir  = windDir(c.winddirection_10m);
+        document.getElementById('weatherPill').innerHTML =
+          `${icon} <strong>Hydra</strong> · ${temp}°C · Wind ${wind} kn ${dir}`;
+      })
+      .catch(() => {
+        document.getElementById('weatherPill').innerHTML = '🌡️ Weather unavailable';
+      });
+  </script>
 </body>
 </html>
